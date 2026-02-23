@@ -1,0 +1,94 @@
+############################
+# Java & Gradle Build
+############################
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+*.class
+*.jar
+*.war
+*.ear
+target/
+
+############################
+# IDE - IntelliJ IDEA
+############################
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+############################
+# IDE - Eclipse/STS
+############################
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+############################
+# IDE - NetBeans
+############################
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+############################
+# IDE - VS Code
+############################
+.vscode/
+
+############################
+# Operating System
+############################
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+############################
+# Logs & Temporary Files
+############################
+*.log
+logs/
+temp/
+tmp/
+
+############################
+# Environment & Secrets
+############################
+.env
+.env.local
+.env.*.local
+application-local.yml
+application-local.properties
+application-secret.yml
+application-secret.properties
+
+############################
+# Database
+############################
+*.db
+*.sqlite
+*.h2.db
+
+############################
+# Others
+############################
+*.orig
+*.rej

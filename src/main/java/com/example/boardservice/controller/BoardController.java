@@ -1,0 +1,22 @@
+package com.example.boardservice.controller;
+
+import com.example.boardservice.dto.CreateBoardRequestDto;
+import com.example.boardservice.service.BoardService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/boards")
+public class BoardController {
+    private final BoardService boardService;
+
+    public BoardController(BoardService boardService){
+        this.boardService = boardService;
+    }
+
+    @PostMapping()
+    public ResponseEntity<Void> create(@RequestBody CreateBoardRequestDto createBoardRequestDto){
+        boardService.create(createBoardRequestDto);
+        return ResponseEntity.noContent().build();
+    }
+}
