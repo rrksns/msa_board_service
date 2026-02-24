@@ -1,5 +1,6 @@
 package com.example.boardservice.controller;
 
+import com.example.boardservice.dto.BoardResponseDto;
 import com.example.boardservice.dto.CreateBoardRequestDto;
 import com.example.boardservice.service.BoardService;
 import org.springframework.http.ResponseEntity;
@@ -18,5 +19,11 @@ public class BoardController {
     public ResponseEntity<Void> create(@RequestBody CreateBoardRequestDto createBoardRequestDto){
         boardService.create(createBoardRequestDto);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{boardId}")
+    public ResponseEntity<BoardResponseDto> getBoard(@PathVariable Long boardId){
+        BoardResponseDto boardResponseDto = boardService.getBoard(boardId);
+        return ResponseEntity.ok(boardResponseDto);
     }
 }
