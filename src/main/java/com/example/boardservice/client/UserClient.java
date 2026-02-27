@@ -1,8 +1,10 @@
 package com.example.boardservice.client;
 
+import com.example.boardservice.dto.AddActivitiyScoreRequestDto;
 import com.example.boardservice.dto.UserResponseDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
@@ -50,5 +52,17 @@ public class UserClient {
             //log.error("사용자 정보 조회 실패")
             return Collections.emptyList();
         }
+    }
+
+    public void addActivityScore(Long userId, int score){
+        AddActivitiyScoreRequestDto addActivitiyScoreRequestDto
+                = new AddActivitiyScoreRequestDto(userId, score);
+
+        this.restClient.post()
+                .uri("/users/activity-score/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(addActivitiyScoreRequestDto)
+                .retrieve()
+                .toBodilessEntity();
     }
 }

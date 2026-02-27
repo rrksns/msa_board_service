@@ -1,5 +1,6 @@
 package com.example.boardservice.service;
 
+import com.example.boardservice.client.PointClient;
 import com.example.boardservice.client.UserClient;
 import com.example.boardservice.domain.Board;
 import com.example.boardservice.domain.BoardRepository;
@@ -20,14 +21,22 @@ import java.util.Optional;
 public class BoardService {
     private final BoardRepository boardRepository;
     private final UserClient userClient;
+    private final PointClient pointClient;
 
-    public BoardService(BoardRepository boardRepository, UserClient userClient){
+    public BoardService(
+            BoardRepository boardRepository,
+            UserClient userClient,
+            PointClient pointClient){
         this.boardRepository = boardRepository;
         this.userClient = userClient;
+        this.pointClient = pointClient;
     }
 
     @Transactional
     public void create(CreateBoardRequestDto createBoardRequestDto){
+        //게시글 작성전 100포인트 차감
+        pointClient.deductPoints(createBoardRequestDto.getUserId(), 100);
+
         Board board = new Board(
                 createBoardRequestDto.getTitle(),
                 createBoardRequestDto.getContent(),
@@ -35,6 +44,9 @@ public class BoardService {
         );
 
         this.boardRepository.save(board);
+
+        //게시글 작성시 작성자에게 활동점수 10부여
+        userClient.addActivityScore(createBoardRequestDto.getUserId(), 10);
     }
 
     public BoardResponseDto getBoard(Long boardId){
